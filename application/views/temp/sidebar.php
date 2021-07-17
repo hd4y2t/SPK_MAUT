@@ -6,7 +6,7 @@
 
     <!-- Sidebar user panel -->
     <div class="user-panel">
-      <img src="<?php echo base_url('assets'); ?>/logoku.JPG" class="profile-user-img img-responsive " alt="User Image">
+      <img src="<?php echo base_url('assets'); ?>/logoku.jpg" class="profile-user-img img-responsive " alt="User Image">
     </div>
 
     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -39,22 +39,6 @@
           <li>
             <a href="<?php echo base_url('index.php/Pegawai') ?>">
               <div class="btn btn-block btn-social  "><i class=" fa fa-users  "></i> <span>Pegawai</span></div>
-            </a>
-          </li>
-      <?php endif;
-      endif; ?>
-
-      <?php if ($this->session->userdata('unit_pegawai') == "Admin") : ?>
-        <?php if ($judulhalaman == "Jurusan") : ?>
-          <li class="active">
-            <a href="<?php echo base_url('index.php/Jurusan') ?>">
-              <div class="btn btn-block btn-social  "><i class=" ion-person text-green "></i> <span>Jurusan</span></div>
-            </a>
-          </li>
-        <?php else : ?>
-          <li>
-            <a href="<?php echo base_url('index.php/Jurusan') ?>">
-              <div class="btn btn-block btn-social  "><i class=" ion-person  "></i> <span>Jurusan</span></div>
             </a>
           </li>
       <?php endif;
@@ -110,22 +94,6 @@
       endif; ?>      -->
 
       <?php if ($this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Siswa") : ?>
-        <?php if ($judulhalaman == "Penilaian Jurusan") : ?>
-          <li class="active">
-            <a href="<?php echo base_url('index.php/Peserta') ?>">
-              <div class="btn btn-block btn-social  "><i class=" glyphicon glyphicon-user text-green "></i> <span>Penilaian Jurusan</span></div>
-            </a>
-          </li>
-        <?php else : ?>
-          <li>
-            <a href="<?php echo base_url('index.php/Peserta') ?>">
-              <div class="btn btn-block btn-social  "><i class=" glyphicon glyphicon-user  "></i> <span>Penilaian Jurusan</span></div>
-            </a>
-          </li>
-      <?php endif;
-      endif; ?>
-
-      <?php if ($this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Siswa") : ?>
         <?php if ($judulhalaman == "Akademik") : ?>
           <li class="active">
             <a href="<?php echo base_url('index.php/Akademik') ?>">
@@ -136,6 +104,22 @@
           <li>
             <a href="<?php echo base_url('index.php/Akademik') ?>">
               <div class="btn btn-block btn-social  "><i class=" ion-ios-book  "></i> <span>Akademik</span></div>
+            </a>
+          </li>
+      <?php endif;
+      endif; ?>
+
+      <?php if ($this->session->userdata('unit_pegawai') == "Admin" || $this->session->userdata('unit_pegawai') == "Siswa") : ?>
+        <?php if ($judulhalaman == "Penilaian Jurusan") : ?>
+          <li class="active">
+            <a href="<?php echo base_url('index.php/Peserta') ?>">
+              <div class="btn btn-block btn-social  "><i class=" glyphicon glyphicon-user text-green "></i> <span>Penilaian Jurusan</span></div>
+            </a>
+          </li>
+        <?php else : ?>
+          <li>
+            <a href="<?php echo base_url('index.php/Peserta') ?>">
+              <div class="btn btn-block btn-social  "><i class=" glyphicon glyphicon-user  "></i> <span>Penilaian Jurusan</span></div>
             </a>
           </li>
       <?php endif;
