@@ -32,13 +32,13 @@
         <?php if ($judulhalaman == "Pegawai") : ?>
           <li class="active">
             <a href="<?php echo base_url('index.php/Pegawai') ?>">
-              <div class="btn btn-block btn-social  "><i class=" fa fa-users  "></i> <span>Pegawai</span></div>
+              <div class="btn btn-block btn-social  "><i class=" fa fa-users  "></i> <span>User</span></div>
             </a>
           </li>
         <?php else : ?>
           <li>
             <a href="<?php echo base_url('index.php/Pegawai') ?>">
-              <div class="btn btn-block btn-social  "><i class=" fa fa-users  "></i> <span>Pegawai</span></div>
+              <div class="btn btn-block btn-social  "><i class=" fa fa-users  "></i> <span>User</span></div>
             </a>
           </li>
       <?php endif;
