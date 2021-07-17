@@ -31,7 +31,7 @@ class Laporan extends CI_Controller
 	}
 	public function pegawai()
 	{				
-		$judulhalaman = "Laporan Pegawai";
+		$judulhalaman = "Laporan User";
 		$this->data['judulhalaman'] = $judulhalaman;
 		$this->data['pengguna']=$this->Pegawai_model->get_all();
 		$this->load->view('temp/header');	
@@ -62,4 +62,3 @@ class Laporan extends CI_Controller
 
 
 }
-?>
