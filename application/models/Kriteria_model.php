@@ -71,4 +71,3 @@ class kriteria_model extends CI_Model
         return $this->dbforge->drop_column('matrik', $id_kriteria);
     }    
 }
-?>

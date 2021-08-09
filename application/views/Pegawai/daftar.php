@@ -48,6 +48,7 @@
               <th class="col-md-1">Tanggal Lahir</th>
               <th>Alamat</th>
               <th>No Hp</th>
+              <th>Angkatan</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -66,6 +67,7 @@
                   "<td class='col-md-1'>" . $out->tgl_lahir . "</td>" .
                   "<td>" . $out->alamat . "</td>" .
                   "<td>" . $out->no_telp . "</td>" .
+                  "<td>" . $out->angkatan . "</td>" .
                   '<td class="col-md-2">
                             <center>
                                 <a class="btn btn-social-icon btn-danger" href="' . base_url("index.php/Pegawai/delete/" . $out->id_pegawai) . '"><i class="fa fa-remove"></i></a> 

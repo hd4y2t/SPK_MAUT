@@ -41,6 +41,7 @@ class Pegawai extends CI_Controller
 		$this->data_user['tgl_lahir'] = date("Y-m-d", strtotime($tanggal));
 		$this->data_user['alamat'] = $this->input->post('alamat');
 		$this->data_user['no_telp'] = $this->input->post('no_hp');
+		$this->data_user['angkatan'] = $this->input->post('angkatan');
 		$this->data_user['password'] = md5($this->input->post('nip'));
 
 		$result = $this->Pegawai_model->insert($this->data_user);
@@ -111,6 +112,7 @@ class Pegawai extends CI_Controller
 		$tanggal = $this->input->post('tgl_lahir');
 		$this->data_user['tgl_lahir'] = date("Y-m-d", strtotime($tanggal));
 		$this->data_user['alamat'] = $this->input->post('alamat');
+		$this->data_user['angkatan'] = $this->input->post('angkatan');
 		$this->data_user['no_telp'] = $this->input->post('no_hp');
 		if ($this->input->post('password') != null) {
 			$this->data_user['password'] = md5($this->input->post('password'));

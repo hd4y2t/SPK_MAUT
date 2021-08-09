@@ -14,7 +14,7 @@
 
         <!--untuk admin-->
         <?php if ($this->session->userdata('unit_pegawai') == "Admin") { ?>
-          <a href="<?php echo base_url('index.php/Peserta/form') ?>">
+          <a href="<?php echo base_url('index.php/Peserta/form/') ?>">
             <button type="button" class="btn btn-danger">Tambah</button>
           </a>
         <?php } ?>

@@ -12,6 +12,7 @@ class Peserta extends CI_Controller
 		$this->load->model('Kriteria_model');
 		$this->load->model('Jurusan_model');
 		$this->load->model('Universitas_model');
+		$this->load->model('Pegawai_model');
 		$this->load->model('Nilai_model');
 		$this->load->model('Nilai_akhir_model');
 		$this->load->model('Nilai_utility_model');
@@ -20,9 +21,20 @@ class Peserta extends CI_Controller
 
 	public function index()
 	{
+		$judulhalaman = "Daftar Peserta";
+		$this->data['judulhalaman'] = $judulhalaman;
+		$this->data['pengguna'] = $this->Pegawai_model->get_all_user();
+		$this->load->view('temp/header');
+		$this->load->view('temp/sidebar', $this->data);
+		$this->load->view('Peserta/list');
+		$this->load->view('temp/footer');
+	}
+
+	public function daftar($id_pegawai)
+	{
 		$judulhalaman = "Penilaian Jurusan";
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['pengguna'] = $this->Nilai_akhir_model->get_all_join();
+		$this->data['pengguna'] = $this->Nilai_akhir_model->get_all_join($id_pegawai);
 		$this->load->view('temp/header');
 		$this->load->view('temp/sidebar', $this->data);
 		$this->load->view('Peserta/daftar');
@@ -174,13 +186,12 @@ class Peserta extends CI_Controller
 		}
 
 		$this->session->set_flashdata('berhasil', 'Data Penilaian Jurusan Berhasil Dihapus');
-		redirect('Peserta');
+		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		// redirect('Peserta/daftar');
 	}
 
 	public function akademik()
 	{
-
-
 		$judulhalaman = "Nilai";
 		$this->data['judulhalaman'] = $judulhalaman;
 		$this->data['pengguna'] = $this->Akademik_model->get_all();
@@ -277,7 +288,7 @@ class Peserta extends CI_Controller
 			$this->Nilai_akhir_model->edit($akhir->id_nilai_akhir, $this->nilai_akhir);
 		}
 
-		//selesai nilai akhir
+		// selesai nilai akhir
 		if ($result == null) {
 			$this->session->set_flashdata('berhasil', 'Data Penilaian Jurusan Berhasil Diedit');
 		} else {
