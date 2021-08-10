@@ -1,8 +1,8 @@
-<?php 
+<?php
 class Nilai_utility_model extends CI_Model
-{   
-     private $primary_key = 'id_utility';
-     private $table_name  = 'nilai_utility';
+{
+    private $primary_key = 'id_utility';
+    private $table_name  = 'nilai_utility';
 
     function __construct()
     {
@@ -15,7 +15,7 @@ class Nilai_utility_model extends CI_Model
         $query = $this->db->get($this->table_name);
         return $query->row();
     }
-    function get_data_kiteria($id,$id1)
+    function get_data_kiteria($id, $id1)
     {
         $this->db->where('id_nilai_akhir', $id);
         $this->db->where('id_kriteria', $id1);
@@ -36,7 +36,7 @@ class Nilai_utility_model extends CI_Model
         $query = $this->db->get($this->table_name);
         return $query->row()->MAX;
     }
-    function get_data1($id,$code_sub)
+    function get_data1($id, $code_sub)
     {
         $this->db->where("id_peserta", $id);
         $this->db->where("code_sub", $code_sub);
@@ -55,18 +55,18 @@ class Nilai_utility_model extends CI_Model
 
     function get_all()
     {
-        $this->db->order_by('nilai_utility',"desc");
+        $this->db->order_by('nilai_utility', "desc");
         $query = $this->db->get($this->table_name);
         return $query->result();
     }
 
     function get_all_join()
     {
-        $this->db->order_by($this->primary_key,"desc");
-        $this->db->join('kriteria','kriteria.id_kriteria=nilai_utility.id_kriteria');
+        $this->db->order_by($this->primary_key, "desc");
+        $this->db->join('kriteria', 'kriteria.id_kriteria=nilai_utility.id_kriteria');
         $query = $this->db->get($this->table_name);
         return $query->result();
-    }  
+    }
 
     function count_all()
     {
@@ -84,7 +84,7 @@ class Nilai_utility_model extends CI_Model
         return $this->db->update($this->table_name, $data);
     }
 
-    function edit_nilai($id_kriteria,$id, $data)
+    function edit_nilai($id_kriteria, $id, $data)
     {
         $this->db->where('id_kriteria', $id_kriteria);
         $this->db->where('id_nilai_akhir', $id);
@@ -95,7 +95,7 @@ class Nilai_utility_model extends CI_Model
     {
         return $this->db->delete($this->table_name, array('id_peserta' => $id));
     }
-    
+
     function get_data_tanggal($id)
     {
         $this->db->select('tgl_lahir');
@@ -108,15 +108,23 @@ class Nilai_utility_model extends CI_Model
     {
         $query = $this->db->query("SELECT $this->primary_key from $this->table_name order by $this->primary_key DESC LIMIT 1 ");
         return $query->row()->id_utility;
-    } 
+    }
     function get_all_year($id)
     {
         $this->db->select('*');
         $this->db->from($this->table_name);
-        $this->db->join('nilai_akhir','nilai_akhir.id_nilai_akhir=nilai_utility.id_nilai_akhir');
+        $this->db->join('nilai_akhir', 'nilai_akhir.id_nilai_akhir=nilai_utility.id_nilai_akhir');
         $this->db->where("id_akademik", $id);
         $query = $this->db->get();
         return $query->result();
-    }   
+    }
+    function get_all_user_nilai($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table_name);
+        $this->db->join('nilai_akhir', 'nilai_akhir.id_nilai_akhir=nilai_utility.id_nilai_akhir');
+        // $this->db->where("id_pegawai", $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
-?>

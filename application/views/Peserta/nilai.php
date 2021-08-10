@@ -13,7 +13,7 @@
 
   <!--Content header-->
   <section class="content-header">
-    <h1><?php echo $judulhalaman ?></h1>
+    <h1><?php echo $judulhalaman  ?></h1>
   </section>
 
   <!--Main content-->
@@ -25,7 +25,7 @@
       </ol>
     </div>
 
-    <div id="area">
+    <!-- <div id="area">
       <div class='box box-danger'>
         <div class='box-header'>
           <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-right" data-widget="collapse">Nilai Kriteria</button>
@@ -71,132 +71,135 @@
           </table>
           <br>
         </div>
+      </div> -->
+    <!-- 
+    <div class='box box-danger'>
+      <div class='box-header'>
+        <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Nilai Utility</button>
       </div>
 
-      <div class='box box-danger'>
-        <div class='box-header'>
-          <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Nilai Utility</button>
-        </div>
+      <div class="col-md-5">
+      </div>
 
-        <div class="col-md-5">
-        </div>
+      <div class="box-body">
+        <table class="table table-bordered text-center ">
+          <thead>
+            <tr>
+              <th>Universitas</th>
+              <th>Jurusan</th>
+              <?php
+              foreach ($pengguna as $out) {
+                echo "<th>" . $out->nama_kriteria . "</th>";
+              }
+              ?>
+            </tr>
+          </thead>
 
-        <div class="box-body">
-          <table class="table table-bordered text-center ">
-            <thead>
-              <tr>
-                <th>Universitas</th>
-                <th>Jurusan</th>
-                <?php
+          <tbody class="">
+            <?php $i = 0;
+            if ($peringkat != 0) {
+              foreach ($peringkat as $akhir) {
+                echo
+                "<tr>" .
+                  "<td>" . $akhir->nama_universitas . "</td>" .
+                  "<td>" . $akhir->jurusan . "</td>";
                 foreach ($pengguna as $out) {
-                  echo "<th>" . $out->nama_kriteria . "</th>";
+                  $this->load->model('Nilai_utility_model');
+                  $utility = $this->Nilai_utility_model->get_data_kiteria($akhir->id_nilai_akhir, $out->id_kriteria);
+                  echo "<td>" . $utility->nilai_utility . "</td>";
                 }
-                ?>
-              </tr>
-            </thead>
-
-            <tbody class="">
-              <?php $i = 0;
-              if ($peringkat != 0) {
-                foreach ($peringkat as $akhir) {
-                  echo
-                  "<tr>" .
-                    "<td>" . $akhir->nama_universitas . "</td>" .
-                    "<td>" . $akhir->jurusan . "</td>";
-                  foreach ($pengguna as $out) {
-                    $this->load->model('Nilai_utility_model');
-                    $utility = $this->Nilai_utility_model->get_data_kiteria($akhir->id_nilai_akhir, $out->id_kriteria);
-                    echo "<td>" . $utility->nilai_utility . "</td>";
-                  }
-                  echo "</tr>";
-                }
+                echo "</tr>";
               }
-              ?>
-            </tbody>
-          </table>
+            }
+            ?>
+          </tbody>
+        </table>
 
-          <br>
-        </div>
+        <br>
+      </div>
+    </div> -->
+
+    <!-- <div class='box box-danger box box-primary'>
+      <div class='box-header'>
+        <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Nilai Akhir Penilaian</button>
       </div>
 
-      <div class='box box-danger box box-primary'>
-        <div class='box-header'>
-          <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Nilai Akhir Penilaian</button>
-        </div>
-
-        <div class="col-md-5">
-        </div>
-
-        <div class="box-body">
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th>Universitas</th>
-                <th>Jurusan</th>
-                <th>Nilai</th>
-              </tr>
-            </thead>
-
-            <tbody class="">
-              <?php $i = 0;
-              if ($peringkat != 0) {
-                foreach ($peringkat as $out) {
-                  echo
-                  "<tr>" .
-                    "<td>" . $out->nama_universitas . "</td>" .
-                    "<td>" . $out->jurusan . "</td>" .
-                    "<td class='col-md-1'>" . $out->nilai_akhir . "</td>";
-                  echo "</tr>";
-                  $i++;
-                }
-              }
-              ?>
-            </tbody>
-          </table>
-
-          <br>
-        </div>
+      <div class="col-md-5">
       </div>
 
-      <div class='box box-danger box box-primary'>
-        <div class='box-header'>
-          <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Ranking Jurusan yang diminati</button>
-        </div>
+      <div class="box-body">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th>Universitas</th>
+              <th>Jurusan</th>
+              <th>Nilai</th>
+            </tr>
+          </thead>
 
-        <div class="col-md-5">
-        </div>
-
-        <div class="box-body">
-          <table class="table table-bordered text-center">
-            <thead>
-              <tr>
-                <th>Peringkat</th>
-                <th>Universitas</th>
-                <th>Jurusan</th>
-                <th>Nilai</th>
-              </tr>
-            </thead>
-
-            <tbody class="">
-              <?php $i = 0;
-              if ($peringkat1 != 0) {
-                foreach ($peringkat1 as $out1) {
-                  echo
-                  "<tr>" .
-                    "<td>" . ($i + 1) . "</td>" .
-                    "<td>" . $out1->nama_universitas . "</td>" .
-                    "<td>" . $out1->jurusan . "</td>" .
-                    "<td class='col-md-1'>" . number_format($out1->nilai_akhir, 3) . "</td>";
-                  echo "</tr>";
-                  $i++;
-                }
+          <tbody class="">
+            <?php $i = 0;
+            if ($peringkat != 0) {
+              foreach ($peringkat as $out) {
+                echo
+                "<tr>" .
+                  "<td>" . $out->nama_universitas . "</td>" .
+                  "<td>" . $out->jurusan . "</td>" .
+                  "<td class='col-md-1'>" . $out->nilai_akhir . "</td>";
+                echo "</tr>";
+                $i++;
               }
-              ?>
-            </tbody>
-          </table>
-          <br>
+            }
+            ?>
+          </tbody>
+        </table>
+
+        <br>
+      </div>
+    </div> -->
+
+    <div class='box box-danger box box-primary'>
+      <div class='box-header'>
+        <button type="button" class="btn btn-danger" class="btn btn-box-tool pull-left" data-widget="collapse">Ranking Jurusan yang diminati</button>
+      </div>
+
+      <div class="col-md-5">
+      </div>
+
+      <div class="box-body">
+        <div>
+          <label>Nama Siswa : <?= $user['nama_pegawai']; ?></label>
         </div>
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th>Peringkat</th>
+              <th>Universitas</th>
+              <th>Jurusan</th>
+              <th>Nilai</th>
+            </tr>
+          </thead>
+
+          <tbody class="">
+            <?php $i = 0;
+            if ($peringkat1 != 0) {
+              foreach ($peringkat1 as $out1) {
+                echo
+                "<tr>" .
+                  "<td>" . ($i + 1) . "</td>" .
+                  "<td>" . $out1->nama_universitas . "</td>" .
+                  "<td>" . $out1->jurusan . "</td>" .
+                  "<td class='col-md-1'>" . number_format($out1->nilai_akhir, 3) . "</td>";
+                echo "</tr>";
+                $i++;
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+        <br>
       </div>
     </div>
-  </section>
+</div>
+</section>
 </div>

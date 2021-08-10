@@ -90,7 +90,7 @@
                   </div>
                   <?php
                   foreach ($pengguna as $golongan) {
-                    echo '              
+                    echo '
                     <div class="box-body">
                       <label for="HP" class="col-md-6">' . $golongan->nama_kriteria . '</label>
                       <div class="col-sm-6">
@@ -99,6 +99,20 @@
                     </div>';
                   } ?>
                 </div>
+                <div class="form-group">
+                  <label for="HP" class="col-sm-6">Pilih Siswa</label>
+                  <div class="col-sm-6 ">
+                    <select class="form-control" name="id_pegawai">
+                      <?php
+                      foreach ($pegawai as $golongan) {
+                        echo '<option value=' . $golongan->id_pegawai . ' >' . $golongan->nama_pegawai;
+                        '</option>';
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+
                 <!--box-body-->
                 <div class="box-footer">
                   <a href="<?php echo base_url('index.php/peserta') ?>">

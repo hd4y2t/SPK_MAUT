@@ -36,14 +36,14 @@ class Nilai_akhir_model extends CI_Model
         return $query->result();
     }
 
-    function get_all_join_nilai($id)
+    function get_all_join_nilai($id_pegawai)
     {
         $this->db->select('*');
         $this->db->from($this->table_name);
         $this->db->join('universitas', 'universitas.id_universitas=nilai_akhir.id_universitas');
         $this->db->join('jurusan', 'jurusan.id_jurusan=nilai_akhir.id_jurusan');
         $this->db->join('akademik', 'akademik.id_akademik=nilai_akhir.id_akademik');
-        $this->db->where('nilai_akhir.id_akademik', $id);
+        $this->db->where('nilai_akhir.id_akademik', $id_pegawai);
         // $this->db->order_by('nilai_akhir',"desc");
         $query = $this->db->get();
         return $query->result();
@@ -102,14 +102,14 @@ class Nilai_akhir_model extends CI_Model
         return $query->row()->id_nilai_akhir;
     }
 
-    function get_all_join1($id)
+    function get_all_join1($id_pegawai)
     {
         $this->db->select('*');
         $this->db->from($this->table_name);
         $this->db->join('universitas', 'universitas.id_universitas=nilai_akhir.id_universitas');
         $this->db->join('jurusan', 'jurusan.id_jurusan=nilai_akhir.id_jurusan');
         $this->db->join('akademik', 'akademik.id_akademik=nilai_akhir.id_akademik');
-        $this->db->where('nilai_akhir.id_akademik', $id);
+        $this->db->where('nilai_akhir.id_pegawai', $id_pegawai);
         $this->db->order_by('nilai_akhir', "desc");
         $query = $this->db->get();
         return $query->result();

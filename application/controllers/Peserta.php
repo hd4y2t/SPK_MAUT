@@ -35,19 +35,23 @@ class Peserta extends CI_Controller
 		$judulhalaman = "Penilaian Jurusan";
 		$this->data['judulhalaman'] = $judulhalaman;
 		$this->data['pengguna'] = $this->Nilai_akhir_model->get_all_join($id_pegawai);
+		$this->data['user'] = $this->db->get_where('nilai_akhir', ['id_pegawai' => $id_pegawai])->row_array();
+		$this->data['pegawai'] = $this->db->get_where('pegawai', ['id_pegawai' => $id_pegawai])->row_array();
+		// $pSurat = $this->db->get_where('pengajuan_surat', ['id' => $id])->row_array();
 		$this->load->view('temp/header');
 		$this->load->view('temp/sidebar', $this->data);
 		$this->load->view('Peserta/daftar');
 		$this->load->view('temp/footer');
 	}
 
-	public function nilai($id = null)
+	public function nilai($id_pegawai)
 	{
 		$judulhalaman = "Nilai";
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['peringkat'] = $this->Nilai_akhir_model->get_all_join_nilai($id);
-		$this->data['peringkat1'] = $this->Nilai_akhir_model->get_all_join1($id);
+		$this->data['peringkat'] = $this->Nilai_akhir_model->get_all_join_nilai($id_pegawai);
+		$this->data['peringkat1'] = $this->Nilai_akhir_model->get_all_join1($id_pegawai);
 		$this->data['pengguna'] = $this->Kriteria_model->get_all();
+		$this->data['user'] = $this->db->get_where('pegawai', ['id_pegawai' => $id_pegawai])->row_array();
 		$this->load->view('temp/header');
 		$this->load->view('temp/sidebar', $this->data);
 		$this->load->view('Peserta/nilai');
@@ -60,8 +64,11 @@ class Peserta extends CI_Controller
 		$this->data_user['id_universitas'] = $this->input->post('id_universitas');
 		$this->data_user['id_jurusan'] = $this->input->post('id_jurusan');
 		$this->data_user['id_akademik'] = $this->input->post('id_akademik');
+		$this->data_user['id_pegawai'] = $this->input->post('id_pegawai');
 		$result = $this->Nilai_akhir_model->insert($this->data_user);
 		$id_nilai_akhir = $this->Nilai_akhir_model->get_data_last();
+		// $user= $this->db->get('nilai_akhir')->result_array();
+		// $userp=$this->db
 
 
 		//selesai simpan tabel nilai
@@ -79,8 +86,9 @@ class Peserta extends CI_Controller
 
 		//simpan nilai Utility
 		$tahun = $this->Akademik_model->get_all();
-		foreach ($tahun as $year) {
-			$nilai = $this->Nilai_utility_model->get_all_year($year->id_akademik);
+		$pegawai = $this->Pegawai_model->get_all_user();
+		foreach ($pegawai as $user) {
+			$nilai = $this->Nilai_utility_model->get_all_user_nilai($user->id_pegawai);
 			foreach ($nilai as $out) {
 				$x = 0;
 				$y = 0;
@@ -95,6 +103,23 @@ class Peserta extends CI_Controller
 				$this->Nilai_utility_model->edit($out->id_utility, $this->nilai_utility);
 			}
 		}
+		// foreach ($tahun as $year) {
+		// 	$nilai = $this->Nilai_utility_model->get_all_year($year->id_akademik);
+		// 	foreach ($nilai as $out) {
+		// 		$x = 0;
+		// 		$y = 0;
+		// 		$z = 0;
+		// 		$min = $this->Nilai_utility_model->get_min($out->id_kriteria);
+		// 		$max = $this->Nilai_utility_model->get_max($out->id_kriteria);
+		// 		//rumus nilai utility
+		// 		$x = $max - $min;
+		// 		$y = $out->nilai_kriteria - $min;
+		// 		$z = $y / $x;
+		// 		$this->nilai_utility['nilai_utility'] = number_format($z, 3);
+		// 		$this->data_user['id_pegawai'] = $this->input->post('id_pegawai');
+		// 		$this->Nilai_utility_model->edit($out->id_utility, $this->nilai_utility, $this->data_user);
+		// 	}
+		// }
 		//selesai simpan nilai utility
 
 		//simpan nilai normalisasi
@@ -130,7 +155,8 @@ class Peserta extends CI_Controller
 		$this->data['jurusan'] = $this->Jurusan_model->get_all();
 		$this->data['univ'] = $this->Universitas_model->get_all();
 		$this->data['akademik'] = $this->Akademik_model->get_all();
-
+		$this->data['pegawai'] = $this->Pegawai_model->get_all_user();
+		// $this->data['user'] = $this->db->get_where('pegawai', ['id_pegawai' => $id_pegawai])->row_array();
 		$judulhalaman = "Penilaian Jurusan";
 		$this->data['judulhalaman'] = $judulhalaman;
 		$this->load->view('temp/header');
@@ -192,9 +218,9 @@ class Peserta extends CI_Controller
 
 	public function akademik()
 	{
-		$judulhalaman = "Nilai";
+		$judulhalaman = "Daftar Nilai Siswa";
 		$this->data['judulhalaman'] = $judulhalaman;
-		$this->data['pengguna'] = $this->Akademik_model->get_all();
+		$this->data['pengguna'] = $this->Pegawai_model->get_all_user();
 
 		$this->load->view('temp/header');
 		$this->load->view('temp/sidebar', $this->data);

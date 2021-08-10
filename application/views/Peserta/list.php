@@ -13,18 +13,18 @@
             <div class='box-header'>
 
                 <!--untuk admin-->
-                <!-- <?php if ($this->session->userdata('unit_pegawai') == "Admin") { ?>
-                    <a href="<?php echo base_url('index.php/Peserta/list') ?>">
-                        <button type="button" class="btn btn-danger">Tambah</button>
+                <?php if ($this->session->userdata('unit_pegawai') == "Admin") { ?>
+                    <a href="<?php echo base_url('index.php/Peserta/form') ?>">
+                        <button type="button" class="btn btn-danger">Tambah Penilaian</button>
                     </a>
-                <?php } ?> -->
+                <?php } ?>
             </div>
             <div class="col-md-5">
 
             </div>
 
             <div class="box-body">
-                <!-- <?php if ($this->session->flashdata('berhasil')) : ?>
+                <?php if ($this->session->flashdata('berhasil')) : ?>
                     <div class="alert alert-success alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h4><i class="icon fa fa-check"></i>Sukses!</h4>
@@ -38,7 +38,7 @@
                         <h4><i class="icon fa fa-check"></i>Gagal!</h4>
                         <?php echo $this->session->flashdata('gagal'); ?>
                     </div>
-                <?php endif; ?> -->
+                <?php endif; ?>
 
                 <table class="table table-bordered text-center " id="list">
                     <thead>
@@ -80,8 +80,7 @@
                                         "<td>" . $out->angkatan . "</td>";
                                     echo '<td class="col-md-2">
                     <center>
-                   <a class="btn btn-social-icon btn-facebook" href="' . base_url("index.php/Peserta/daftar/" . $out->id_pegawai) . '"><i class="fa fa-pencil"></i></a> 
-                    <a class="btn btn-social-icon btn-warning" href="' . base_url("index.php/Peserta/view/" . $out->id_pegawai) . '"><i class="fa fa-eye"></i></a>  ';
+                   <a class="btn btn-social-icon btn-facebook" href="' . base_url("index.php/Peserta/daftar/" . $out->id_pegawai) . '"><i class="fa fa-pencil"></i></a>';
                                     echo '</center>
                     </td>';
                                     echo "</tr>";

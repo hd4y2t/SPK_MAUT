@@ -22,10 +22,10 @@
       <table class="table table-bordered text-center " id="persediaan_keluar">
         <thead>
           <tr>
-            <th> No</th>
-            <th>NIK</th>
-            <!-- <th>Nama</th>
-            <th>Angkatan</th> -->
+            <th>No</th>
+            <th>NIP</th>
+            <th>Nama</th>
+            <!-- <th>Angkatan</th> -->
             <th>Action</th>
           </tr>
         </thead>
@@ -37,12 +37,12 @@
               echo
               "<tr>" .
                 "<td>" . ($i + 1) . "</td>" .
-                "<td>" . $out->tahun   . "</td>" .
-                // "<td>" . $out->nama_pegawai . "</td>" .
+                "<td>" . $out->nik   . "</td>" .
+                "<td>" . $out->nama_pegawai . "</td>" .
                 // "<td>" . $out->angkatan . "</td>" .
                 '<td class="col-md-2">
                             <center>
-                                <a class="btn btn-social-icon" href="' . base_url("index.php/Peserta/nilai/" . $out->id_akademik) . '"><i class="fa fa-eye text-green"></i></a> 
+                                <a class="btn btn-social-icon" href="' . base_url("index.php/Peserta/nilai/" . $out->id_pegawai) . '"><i class="fa fa-eye text-green"></i></a> 
                                 
                             </center>
                         </td>';

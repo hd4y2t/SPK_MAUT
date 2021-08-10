@@ -10,14 +10,10 @@
   <section class="content">
     <div class='box box-danger'>
 
+      <!--untuk admin-->
       <div class='box-header'>
 
-        <!--untuk admin-->
-        <?php if ($this->session->userdata('unit_pegawai') == "Admin") { ?>
-          <a href="<?php echo base_url('index.php/Peserta/form/') ?>">
-            <button type="button" class="btn btn-danger">Tambah</button>
-          </a>
-        <?php } ?>
+        <label> Nama Siswa : <?= $pegawai['nama_pegawai']; ?></label>
       </div>
       <div class="col-md-5">
 
